@@ -31,7 +31,7 @@
             this.tabPageParallelFor = new System.Windows.Forms.TabPage();
             this.textBoxParallelFor = new System.Windows.Forms.TextBox();
             this.btnStartParallelFor = new System.Windows.Forms.Button();
-            this.btnStartThreadRace = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.tabPageParallelInvoke = new System.Windows.Forms.TabPage();
             this.labelParallelInvokeTimer = new System.Windows.Forms.Label();
             this.numericUpDownParallelInvokeTimer = new System.Windows.Forms.NumericUpDown();
@@ -82,16 +82,16 @@
             this.btnStartParallelFor.Size = new System.Drawing.Size(75, 23);
             this.btnStartParallelFor.TabIndex = 0;
             // 
-            // btnStartThreadRace
+            // btnStart
             // 
-            this.btnStartThreadRace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStartThreadRace.Location = new System.Drawing.Point(733, 0);
-            this.btnStartThreadRace.Name = "btnStartThreadRace";
-            this.btnStartThreadRace.Size = new System.Drawing.Size(110, 28);
-            this.btnStartThreadRace.TabIndex = 1;
-            this.btnStartThreadRace.Text = "Старт";
-            this.btnStartThreadRace.UseVisualStyleBackColor = true;
-            this.btnStartThreadRace.Click += new System.EventHandler(this.btnStartThreadRace_Click);
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStart.Location = new System.Drawing.Point(733, 0);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(110, 28);
+            this.btnStart.TabIndex = 1;
+            this.btnStart.Text = "Старт";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // tabPageParallelInvoke
             // 
@@ -249,7 +249,7 @@
             // 
             // tabPageThreadsRace
             // 
-            this.tabPageThreadsRace.Controls.Add(this.btnStartThreadRace);
+            this.tabPageThreadsRace.Controls.Add(this.btnStart);
             this.tabPageThreadsRace.Location = new System.Drawing.Point(4, 22);
             this.tabPageThreadsRace.Name = "tabPageThreadsRace";
             this.tabPageThreadsRace.Size = new System.Drawing.Size(906, 308);
@@ -296,7 +296,7 @@
         private System.Windows.Forms.TabPage tabPageParallelInvoke;
         private System.Windows.Forms.TextBox textBoxParallelInvoke;
         private System.Windows.Forms.CheckBox checkBoxThreadPool;
-        private System.Windows.Forms.Button btnStartThreadRace;
+        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.TextBox textBoxFinishList;
         private System.Windows.Forms.TabPage tabPageThreadsDispatching;
         private System.Windows.Forms.Button btnClearTextBoxParallelInvoke;

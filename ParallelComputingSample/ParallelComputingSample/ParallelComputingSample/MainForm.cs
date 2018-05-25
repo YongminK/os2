@@ -17,53 +17,52 @@ namespace ParallelComputingSample
     {
         public MainForm()
         {
-            InitializeComponent();
-            Start();
-
+            InitializeComponent(); //инициализация компонентов окна
+            Start(); //создание элементов и проверки
         }
         //Список элементов управления 'ProgressBar'
-        private List<ProgressBar> m_ThreadRaceBars;
+        private List<ProgressBar> m_ProcessBars;
         //Список элементов управления 'TextBox' для вывода статистики
-        private List<TextBox> m_ThreadRaceTextBoxes;
+        private List<TextBox> m_ProcessTextBoxes;
         
 
 
         public void Start()
         {
-            //Инициализация элементов управления
-            if (m_ThreadRaceBars != null)
+            //Инициализация элементов 
+            if (m_ProcessBars != null)
             {
-                foreach (ProgressBar _bar in m_ThreadRaceBars)
+                foreach (ProgressBar _bar in m_ProcessBars)
                     this.tabPageThreadsRace.Controls.Remove(_bar);
 
-                m_ThreadRaceBars.Clear();
+                m_ProcessBars.Clear();
             }
             else
             {
-                m_ThreadRaceBars = new List<ProgressBar>();
+                m_ProcessBars = new List<ProgressBar>();
             }
 
-            if (m_ThreadRaceTextBoxes != null)
+            if (m_ProcessTextBoxes != null)
             {
-                foreach (TextBox _txt in m_ThreadRaceTextBoxes)
+                foreach (TextBox _txt in m_ProcessTextBoxes)
                     this.tabPageThreadsRace.Controls.Remove(_txt);
 
-                m_ThreadRaceTextBoxes.Clear();
+                m_ProcessTextBoxes.Clear();
             }
             else
             {
-                m_ThreadRaceTextBoxes = new List<TextBox>();
+                m_ProcessTextBoxes = new List<TextBox>();
             }
 
             //Количество потоков
             int _ThreadsCount = 9;
             //Длина бара
-            int _RaceLength = 100;
+            int _BarLength = 100;
 
             //Размещение элементов управления
             for (int i = 0; i < _ThreadsCount; i++)
             {
-                ProgressBar _bar = new ProgressBar() { Minimum = 0, Maximum = _RaceLength, Value = 0, Left = 5, Top = 5 + i * 25, Width = btnStartThreadRace.Left - 170, Height = 20 };
+                ProgressBar _bar = new ProgressBar() { Minimum = 0, Maximum = _BarLength, Value = 0, Left = 5, Top = 5 + i * 25, Width = btnStart.Left - 170, Height = 20 };
                 TextBox _txt = new TextBox() { Left = 565 , Top = _bar.Top, Width = 170, Height = _bar.Height };
 
                 this.tabPageThreadsRace.Controls.Add(_bar);
@@ -72,58 +71,59 @@ namespace ParallelComputingSample
                 _bar.Visible = true;
                 _txt.Visible = true;
 
-                m_ThreadRaceBars.Add(_bar);
-                m_ThreadRaceTextBoxes.Add(_txt);
+                m_ProcessBars.Add(_bar);
+                m_ProcessTextBoxes.Add(_txt);
             }
         }
     
              //Старт
-        private void btnStartThreadRace_Click(object sender, EventArgs e)
+        private void btnStart_Click(object sender, EventArgs e)
         {
             ProcessInit();
            
         }
         private void ProcessInit()
         {
-            Process _competitor;
+            Process _currentProcess;
             bool[] R = { false, false, false };
             bool[] result = { false, false, false, false,false,false,false,false};
             bool[] isStarted = { false, false, false, false, false, false, false, false,false };
             bool[] isCompleted = { false, false, false, false, false, false, false, false, false };
-            _competitor = new Process(0,1,R,result,isCompleted, isStarted);
+            _currentProcess = new Process(0,1,R,result,isCompleted, isStarted);
 
             Thread _Thread = new Thread(ProcessA);
             //Все создаваемые потоки - фоновые и завершаются вместе с основным приложением
             _Thread.IsBackground = true;
             //Старт
-            _Thread.Start(_competitor);
+            _Thread.Start(_currentProcess);
 
 
         }
         //Потоки
+        //Process A
         private void ProcessA(object state)
         {
             
-            Process _competitor = (Process)state;
-            ProgressBar _bar = m_ThreadRaceBars[_competitor.Index];
-            TextBox _txt = m_ThreadRaceTextBoxes[_competitor.Index];
+            Process _currentProcess = (Process)state;
+            ProgressBar _bar = m_ProcessBars[_currentProcess.Index];
+            TextBox _txt = m_ProcessTextBoxes[_currentProcess.Index];
             BooleanGenerator boolGen = new BooleanGenerator();
-            _competitor.isStarted[0] = true;
+            _currentProcess.isStarted[0] = true;
             //Основной цикл
             while (_bar.Value < _bar.Maximum)
             {
-                if (_competitor.Speed < _competitor.MaxSpeed)
+                if (_currentProcess.CurrentDuration < _currentProcess.Duration) //генерируются случайные R
                 {
-                    _competitor.R[0] = boolGen.NextBoolean();
-                    _competitor.R[1] = boolGen.NextBoolean();
-                    _competitor.R[2] = boolGen.NextBoolean();
-                    _txt.Text = "A: R1=" + _competitor.R[0].ToString() 
-                        + " R2=" + _competitor.R[1].ToString() + " R3=" + _competitor.R[2].ToString();
+                    _currentProcess.R[0] = boolGen.NextBoolean();
+                    _currentProcess.R[1] = boolGen.NextBoolean();
+                    _currentProcess.R[2] = boolGen.NextBoolean();
+                    _txt.Text = "A: R1=" + _currentProcess.R[0].ToString() 
+                        + " R2=" + _currentProcess.R[1].ToString() + " R3=" + _currentProcess.R[2].ToString(); //вывод
                 }
-                int _newValue = _bar.Value + 100 / _competitor.MaxSpeed*25;
-                _competitor.Accelerate();
-                //Обновление элементов управления в потоке пользовательского интерфейса
-                //В качестве параметра передаем экземпляр Delegate, параметризованного лямбда - выражением.
+                //отрисовка шкалы загрузки
+                int _newValue = _bar.Value + 100 / _currentProcess.Duration*25;
+                _currentProcess.ChangeDurration();
+                
                 _bar.Invoke(new MethodInvoker(() =>
                 {
                     if (_newValue < _bar.Maximum)
@@ -131,39 +131,41 @@ namespace ParallelComputingSample
                     else
                         _bar.Value = _bar.Maximum;
                 }));
-                Thread.Sleep(800);                
+                Thread.Sleep(800);               //приостановка процесса  
             }
-            _competitor.isCompleted[0] = true;            
-            _competitor.isStarted[0] = false;
+            _currentProcess.isCompleted[0] = true;            
+            _currentProcess.isStarted[0] = false;
+            //Если А завершен - стартуют B, D, C
+            if(_currentProcess.isCompleted[0])
             {
                 for (int i = 1; i < 4; i++)
                 {
-                    if (i == 1)
+                    if (i == 1) //B
                     {
                         Thread _Thread1;
-                        Process _competitor1 = new Process(i, 2, _competitor.R, 
-                            _competitor.result,_competitor.isCompleted,_competitor.isStarted);
+                        Process _currentProcess1 = new Process(i, 2, _currentProcess.R, 
+                            _currentProcess.result,_currentProcess.isCompleted,_currentProcess.isStarted);
                         _Thread1 = new Thread(MakeProcess);
                         _Thread1.IsBackground = true;
-                        _Thread1.Start(_competitor1);
+                        _Thread1.Start(_currentProcess1);
                     }
-                    else if (i == 3)
+                    else if (i == 3) //D
                     {
                         Thread _Thread3;
-                        Process _competitor3 = new Process(i, 2, _competitor.R,
-                            _competitor.result, _competitor.isCompleted, _competitor.isStarted);
+                        Process _currentProcess3 = new Process(i, 2, _currentProcess.R,
+                            _currentProcess.result, _currentProcess.isCompleted, _currentProcess.isStarted);
                         _Thread3 = new Thread(MakeProcess);
                         _Thread3.IsBackground = true;
-                        _Thread3.Start(_competitor3);
+                        _Thread3.Start(_currentProcess3);
                     }
-                    else
+                    else //C
                     {
                         Thread _Thread2;
-                        Process _competitor2 = new Process(i, 1, _competitor.R,
-                            _competitor.result, _competitor.isCompleted, _competitor.isStarted);
+                        Process _currentProcess2 = new Process(i, 1, _currentProcess.R,
+                            _currentProcess.result, _currentProcess.isCompleted, _currentProcess.isStarted);
                         _Thread2 = new Thread(MakeProcess);
                         _Thread2.IsBackground = true;
-                        _Thread2.Start(_competitor2);
+                        _Thread2.Start(_currentProcess2);
                     }
 
                 }
@@ -171,39 +173,39 @@ namespace ParallelComputingSample
         }
         private void MakeProcess(object state)
         {
-            Process _competitor = (Process)state;
-            ProgressBar _bar = m_ThreadRaceBars[_competitor.Index];
-            TextBox _txt = m_ThreadRaceTextBoxes[_competitor.Index];
+            Process _currentProcess = (Process)state;
+            ProgressBar _bar = m_ProcessBars[_currentProcess.Index];
+            TextBox _txt = m_ProcessTextBoxes[_currentProcess.Index];
             int sleep = 0;
-            _competitor.isStarted[_competitor.Index] = true;
+            _currentProcess.isStarted[_currentProcess.Index] = true;
             while (_bar.Value < _bar.Maximum)
             {
-                if (_competitor.Speed < _competitor.MaxSpeed)
+                if (_currentProcess.CurrentDuration < _currentProcess.Duration)
                 {
-                    switch(_competitor.Index)
+                    switch(_currentProcess.Index)
                     {
-                        case 1:
+                        case 1: //B
                             {
-                                _competitor.result[_competitor.Index - 1] = 
-                                    !_competitor.R[0] & _competitor.R[1] & _competitor.R[2];
+                                _currentProcess.result[_currentProcess.Index - 1] = 
+                                    !_currentProcess.R[0] & _currentProcess.R[1] & _currentProcess.R[2];
                                 _txt.Text = 
-                                    "B: F1= !R1 & R2 & R3 = " + _competitor.result[_competitor.Index - 1].ToString();
+                                    "B: F1= !R1 & R2 & R3 = " + _currentProcess.result[_currentProcess.Index - 1].ToString();
                                 sleep = 400;
                                 break;
                             }
-                        case 2:
+                        case 2: //C
                             {
-                                _competitor.result[1] = _competitor.R[0] | _competitor.R[1] | _competitor.R[2];
-                                _txt.Text = "C: F2= R1 | R2 | R3 = " + _competitor.result[1].ToString();
+                                _currentProcess.result[1] = _currentProcess.R[0] | _currentProcess.R[1] | _currentProcess.R[2];
+                                _txt.Text = "C: F2= R1 | R2 | R3 = " + _currentProcess.result[1].ToString();
                                 sleep = 300;
                                 break;
                             }
-                        case 3:
+                        case 3: //D
                             {
-                                _competitor.result[_competitor.Index - 1] =
-                                    _competitor.R[0] | _competitor.R[1] & _competitor.R[2];
+                                _currentProcess.result[_currentProcess.Index - 1] =
+                                    _currentProcess.R[0] | _currentProcess.R[1] & _currentProcess.R[2];
                                 _txt.Text =
-                                    "D: F3= R1 | R2 & R3 = " + _competitor.result[_competitor.Index - 1].ToString();
+                                    "D: F3= R1 | R2 & R3 = " + _currentProcess.result[_currentProcess.Index - 1].ToString();
                                 sleep = 400;
                                 break;
                             }
@@ -211,8 +213,8 @@ namespace ParallelComputingSample
                             break;
                     }
                 }
-                _competitor.Accelerate();
-                int _newValue = _bar.Value + 100 / _competitor.MaxSpeed;
+                _currentProcess.ChangeDurration();
+                int _newValue = _bar.Value + 100 / _currentProcess.Duration;
                 _bar.Invoke(new MethodInvoker(() =>
                 {
                     if (_newValue < _bar.Maximum)
@@ -223,18 +225,18 @@ namespace ParallelComputingSample
 
                 Thread.Sleep(sleep);
             }
-            _competitor.isCompleted[_competitor.Index] = true;
-            _competitor.isStarted[_competitor.Index] = false;
+            _currentProcess.isCompleted[_currentProcess.Index] = true;
+            _currentProcess.isStarted[_currentProcess.Index] = false;
 
-            
-            if (_competitor.isCompleted[2])
+            //Если заверешн С- старт Е
+            if (_currentProcess.isCompleted[2])
             {
                 Thread _Thread4;
-                Process _competitor4 = new Process(4, 1, _competitor.R,
-                    _competitor.result, _competitor.isCompleted, _competitor.isStarted);
+                Process _currentProcess4 = new Process(4, 1, _currentProcess.R,
+                    _currentProcess.result, _currentProcess.isCompleted, _currentProcess.isStarted);
                 _Thread4 = new Thread(ProcessE);
                 _Thread4.IsBackground = true;
-                _Thread4.Start(_competitor4);
+                _Thread4.Start(_currentProcess4);
             }
 
         }
@@ -242,213 +244,201 @@ namespace ParallelComputingSample
         
         private void ProcessE(object state)
         {
-            Process _competitor = (Process)state;
-            ProgressBar _bar = m_ThreadRaceBars[_competitor.Index];
-            TextBox _txt = m_ThreadRaceTextBoxes[_competitor.Index];
+            Process _currentProcess = (Process)state;
+            ProgressBar _bar = m_ProcessBars[_currentProcess.Index];
+            TextBox _txt = m_ProcessTextBoxes[_currentProcess.Index];
             BooleanGenerator boolGen = new BooleanGenerator();
-            _competitor.isStarted[4] = true;
+            _currentProcess.isStarted[4] = true;
 
             while (_bar.Value < _bar.Maximum)
             {
-                if (_competitor.Speed < _competitor.MaxSpeed)
+                if (_currentProcess.CurrentDuration < _currentProcess.Duration)
                 {
-                    _competitor.result[3] = _competitor.result[1];
-                    _txt.Text = "E: F3 = F2 = " + _competitor.result[3].ToString();
+                    _currentProcess.result[3] = _currentProcess.result[1];
+                    _txt.Text = "E: F3 = F2 = " + _currentProcess.result[3].ToString();
 
                 }
 
-                _competitor.Accelerate();
-                int _newValue = _bar.Value + 100 / _competitor.MaxSpeed;
+                _currentProcess.ChangeDurration();
+                int _newValue = _bar.Value + 100 / _currentProcess.Duration;
                 _bar.Invoke(new MethodInvoker(() =>
                 {
                     if (_newValue < _bar.Maximum)
                         _bar.Value = _newValue;
                     else
                         _bar.Value = _bar.Maximum;
-
-
+                    
                 }));
-
                 Thread.Sleep(1000);
             }
-            _competitor.isCompleted[4] = true;
-            _competitor.isStarted[4] = false;
-
-
-
-            if (_competitor.isCompleted[4] && _competitor.isCompleted[1] && _competitor.isCompleted[3])
+            _currentProcess.isCompleted[4] = true;
+            _currentProcess.isStarted[4] = false;
+            //Если завершен Е - старт F,G,H
+            if (_currentProcess.isCompleted[4] && _currentProcess.isCompleted[1] && _currentProcess.isCompleted[3])
             {
                 for (int i = 5; i < 8; i++)
                 {
                     if (i == 5)
                     {
                         Thread _Thread5;
-                        Process _competitor5 = new Process(i, 1, _competitor.R,
-                            _competitor.result, _competitor.isCompleted, _competitor.isStarted);
+                        Process _currentProcess5 = new Process(i, 1, _currentProcess.R,
+                            _currentProcess.result, _currentProcess.isCompleted, _currentProcess.isStarted);
                         _Thread5 = new Thread(ProcessF);
                         _Thread5.IsBackground = true;
-                        _Thread5.Start(_competitor5);
+                        _Thread5.Start(_currentProcess5);
                     }
                     else if (i == 6)
                     {
                         Thread _Thread6;
-                        Process _competitor6 = new Process(i ,1, _competitor.R,
-                            _competitor.result, _competitor.isCompleted, _competitor.isStarted);
+                        Process _currentProcess6 = new Process(i ,1, _currentProcess.R,
+                            _currentProcess.result, _currentProcess.isCompleted, _currentProcess.isStarted);
                         _Thread6 = new Thread(ProcessG);
                         _Thread6.IsBackground = true;
-                        _Thread6.Start(_competitor6);
+                        _Thread6.Start(_currentProcess6);
                     }
                     else
                     {
                         Thread _Thread7;
-                        Process _competitor7 = new Process(i, 1, _competitor.R,
-                            _competitor.result, _competitor.isCompleted, _competitor.isStarted);
+                        Process _currentProcess7 = new Process(i, 1, _currentProcess.R,
+                            _currentProcess.result, _currentProcess.isCompleted, _currentProcess.isStarted);
                         _Thread7 = new Thread(ProcessH);
                         _Thread7.IsBackground = true;
-                        _Thread7.Start(_competitor7);
+                        _Thread7.Start(_currentProcess7);
                     }
-
                 }
             }
 
         }
+
         private void ProcessF(object state)
         {
-            Process _competitor = (Process)state;
-            ProgressBar _bar = m_ThreadRaceBars[_competitor.Index];
-            TextBox _txt = m_ThreadRaceTextBoxes[_competitor.Index];
-            _competitor.isStarted[5] = true;
+            Process _currentProcess = (Process)state;
+            ProgressBar _bar = m_ProcessBars[_currentProcess.Index];
+            TextBox _txt = m_ProcessTextBoxes[_currentProcess.Index];
+            _currentProcess.isStarted[5] = true;
             while (_bar.Value < _bar.Maximum)
             {
-                if (_competitor.Speed < _competitor.MaxSpeed)
+                if (_currentProcess.CurrentDuration < _currentProcess.Duration)
                 {
-                    _competitor.result[4] = _competitor.result[0] & _competitor.result[2] | _competitor.result[3];
-                    _txt.Text = "F: F5= F1 & F3 | F4 = " + _competitor.result[4].ToString();
-
+                    _currentProcess.result[4] = _currentProcess.result[0] & _currentProcess.result[2] | _currentProcess.result[3];
+                    _txt.Text = "F: F5= F1 & F3 | F4 = " + _currentProcess.result[4].ToString();
                 }
 
-                _competitor.Accelerate();
-                int _newValue = _bar.Value + 100 / _competitor.MaxSpeed;
+                _currentProcess.ChangeDurration();
+                int _newValue = _bar.Value + 100 / _currentProcess.Duration;
                 _bar.Invoke(new MethodInvoker(() =>
                 {
                     if (_newValue < _bar.Maximum)
                         _bar.Value = _newValue;
                     else
                         _bar.Value = _bar.Maximum;
-
-
                 }));
-
                 Thread.Sleep(400);
             }
-            _competitor.isCompleted[5] = true;
-            _competitor.isStarted[5] = false;
+            _currentProcess.isCompleted[5] = true;
+            _currentProcess.isStarted[5] = false;
         }
+
         private void ProcessG(object state)
         {
-            Process _competitor = (Process)state;
-            ProgressBar _bar = m_ThreadRaceBars[_competitor.Index];
-            TextBox _txt = m_ThreadRaceTextBoxes[_competitor.Index];
-            _competitor.isStarted[6] = true;
+            Process _currentProcess = (Process)state;
+            ProgressBar _bar = m_ProcessBars[_currentProcess.Index];
+            TextBox _txt = m_ProcessTextBoxes[_currentProcess.Index];
+            _currentProcess.isStarted[6] = true;
             while (_bar.Value < _bar.Maximum)
             {
-                if (_competitor.Speed < _competitor.MaxSpeed)
+                if (_currentProcess.CurrentDuration < _currentProcess.Duration)
                 {
-                    _competitor.result[5] = _competitor.result[0] | _competitor.result[2] | _competitor.result[3];
-                    _txt.Text = "G: F6= F1 | F3 | F4 = " + _competitor.result[5].ToString();
-
+                    _currentProcess.result[5] = _currentProcess.result[0] | _currentProcess.result[2] | _currentProcess.result[3];
+                    _txt.Text = "G: F6= F1 | F3 | F4 = " + _currentProcess.result[5].ToString();
                 }
 
-                _competitor.Accelerate();
-                int _newValue = _bar.Value + 100 / _competitor.MaxSpeed;
+                _currentProcess.ChangeDurration();
+                int _newValue = _bar.Value + 100 / _currentProcess.Duration;
                 _bar.Invoke(new MethodInvoker(() =>
                 {
                     if (_newValue < _bar.Maximum)
                         _bar.Value = _newValue;
                     else
                         _bar.Value = _bar.Maximum;
-
-
                 }));
 
                 Thread.Sleep(400);
             }
-            _competitor.isCompleted[6] = true;
-            _competitor.isStarted[6] = false;
+            _currentProcess.isCompleted[6] = true;
+            _currentProcess.isStarted[6] = false;
         }
+
         private void ProcessH(object state)
         {
-            Process _competitor = (Process)state;
-            ProgressBar _bar = m_ThreadRaceBars[_competitor.Index];
-            TextBox _txt = m_ThreadRaceTextBoxes[_competitor.Index];
-            _competitor.isStarted[7] = true;
+            Process _currentProcess = (Process)state;
+            ProgressBar _bar = m_ProcessBars[_currentProcess.Index];
+            TextBox _txt = m_ProcessTextBoxes[_currentProcess.Index];
+            _currentProcess.isStarted[7] = true;
             while (_bar.Value < _bar.Maximum)
             {
-                if (_competitor.Speed < _competitor.MaxSpeed)
+                if (_currentProcess.CurrentDuration < _currentProcess.Duration)
                 {
-                    _competitor.result[6] = _competitor.result[0] | !_competitor.result[2] & _competitor.result[3];
-                    _txt.Text = "H: F7= F1 | !F3 & F4 = " + _competitor.result[6].ToString();
-
+                    _currentProcess.result[6] = _currentProcess.result[0] | !_currentProcess.result[2] & _currentProcess.result[3];
+                    _txt.Text = "H: F7= F1 | !F3 & F4 = " + _currentProcess.result[6].ToString();
                 }
 
-                _competitor.Accelerate();
-                int _newValue = _bar.Value + 100 / _competitor.MaxSpeed;
+                _currentProcess.ChangeDurration();
+                int _newValue = _bar.Value + 100 / _currentProcess.Duration;
                 _bar.Invoke(new MethodInvoker(() =>
                 {
                     if (_newValue < _bar.Maximum)
                         _bar.Value = _newValue;
                     else
                         _bar.Value = _bar.Maximum;
-
-
                 }));
 
                 Thread.Sleep(1000);
             }
-            _competitor.isCompleted[7] = true;
-            _competitor.isStarted[7] = false;
-            if(_competitor.isCompleted[7] && _competitor.isCompleted[6] && _competitor.isCompleted[5])
+            _currentProcess.isCompleted[7] = true;
+            _currentProcess.isStarted[7] = false;
+            if(_currentProcess.isCompleted[7] && _currentProcess.isCompleted[6] && _currentProcess.isCompleted[5])
             {
                 Thread _Thread8;
-                Process _competitor8 = new Process(8, 1, _competitor.R,
-                    _competitor.result, _competitor.isCompleted, _competitor.isStarted);
+                Process _currentProcess8 = new Process(8, 1, _currentProcess.R,
+                    _currentProcess.result, _currentProcess.isCompleted, _currentProcess.isStarted);
                 _Thread8 = new Thread(ProcessK);
                 _Thread8.IsBackground = true;
-                _Thread8.Start(_competitor8);
+                _Thread8.Start(_currentProcess8);
             }
         }
+
         private void ProcessK(object state)
         {
-            Process _competitor = (Process)state;
-            ProgressBar _bar = m_ThreadRaceBars[_competitor.Index];
-            TextBox _txt = m_ThreadRaceTextBoxes[_competitor.Index];
-            _competitor.isStarted[8] = true;
+            Process _currentProcess = (Process)state;
+            ProgressBar _bar = m_ProcessBars[_currentProcess.Index];
+            TextBox _txt = m_ProcessTextBoxes[_currentProcess.Index];
+            _currentProcess.isStarted[8] = true;
             while (_bar.Value < _bar.Maximum)
             {
-                if (_competitor.Speed < _competitor.MaxSpeed)
+                if (_currentProcess.CurrentDuration < _currentProcess.Duration)
                 {
-                    _competitor.result[7] = _competitor.result[6] | _competitor.result[5] | _competitor.result[4];
-                    _txt.Text = "K: F8= F7 | F6 | F5 = " + _competitor.result[7].ToString();
-
+                    _currentProcess.result[7] = _currentProcess.result[6] | _currentProcess.result[5] | _currentProcess.result[4];
+                    _txt.Text = "K: F8= F7 | F6 | F5 = " + _currentProcess.result[7].ToString();
                 }
 
-                _competitor.Accelerate();
-                int _newValue = _bar.Value + 100 / _competitor.MaxSpeed;
+                _currentProcess.ChangeDurration();
+                int _newValue = _bar.Value + 100 / _currentProcess.Duration;
                 _bar.Invoke(new MethodInvoker(() =>
                 {
                     if (_newValue < _bar.Maximum)
                         _bar.Value = _newValue;
                     else
                         _bar.Value = _bar.Maximum;
-
-
                 }));
 
                 Thread.Sleep(400);
             }
-            _competitor.isCompleted[8] = true;
-            _competitor.isStarted[8] = false;
+            _currentProcess.isCompleted[8] = true;
+            _currentProcess.isStarted[8] = false;
         }
+
+        //Генератор рандомных булевых
         public class BooleanGenerator
         {
             Random rnd;
@@ -464,22 +454,18 @@ namespace ParallelComputingSample
             }
         }
 
-        
-
-
         public class Process
         {
            
-            public Process(int _Index, int _MaxSpeed, bool[] _R,bool[] _result,bool[] _isCompleted,bool[] _isStarted)
+            public Process(int _Index, int _Duration, bool[] _R,bool[] _result,bool[] _isCompleted,bool[] _isStarted)
             {
                 this.Index = _Index;
-                this.MaxSpeed = _MaxSpeed;               
-                this.Speed = 0;                
+                this.Duration = _Duration;               
+                this.CurrentDuration = 0;                
                 this.R = _R;
                 this.result = _result;
                 this.isCompleted = _isCompleted;
                 this.isStarted = _isStarted;
-
             }
             public bool[] R;
             public bool[] result;
@@ -488,24 +474,22 @@ namespace ParallelComputingSample
 
             //Индекс
             public int Index;
-            //Максимальная скорость
-            public int MaxSpeed { get; private set; }
-            
-
-            //Текущая скорость
-            public int Speed { get; private set; }
+            //Длительность
+            public int Duration { get; private set; }
+            //Текущая 
+            public int CurrentDuration { get; private set; }
        
-            public void Accelerate()
+            public void ChangeDurration()
             {
-                if (this.Speed > this.MaxSpeed)
+                if (this.CurrentDuration > this.Duration)
                     return;
-                //Изменение скорости
-                int _newSpeed = this.Speed + 1;
+                //Изменение состояния
+                int _newCurrentDuration = this.CurrentDuration + 1;
 
-                if (_newSpeed > this.MaxSpeed)
-                    this.Speed = this.MaxSpeed;
+                if (_newCurrentDuration > this.Duration)
+                    this.CurrentDuration = this.Duration;
                 else
-                    this.Speed = _newSpeed;
+                    this.CurrentDuration = _newCurrentDuration;
             }
         }
     }
