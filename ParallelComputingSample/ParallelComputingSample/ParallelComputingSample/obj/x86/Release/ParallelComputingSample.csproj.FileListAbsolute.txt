@@ -37,3 +37,13 @@ C:\Users\Алекс\Desktop\ParallelComputingSample\ParallelComputingSample\Para
 C:\Users\Алекс\Desktop\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.csproj.GenerateResource.Cache
 C:\Users\Алекс\Desktop\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.exe
 C:\Users\Алекс\Desktop\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.pdb
+C:\Users\1234\github\os2\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.exe.config
+C:\Users\1234\github\os2\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.exe
+C:\Users\1234\github\os2\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.pdb
+C:\Users\1234\github\os2\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.csprojResolveAssemblyReference.cache
+C:\Users\1234\github\os2\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.MainForm.resources
+C:\Users\1234\github\os2\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.Properties.Resources.resources
+C:\Users\1234\github\os2\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.csproj.GenerateResource.Cache
+C:\Users\1234\github\os2\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.csproj.CoreCompileInputs.cache
+C:\Users\1234\github\os2\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.exe
+C:\Users\1234\github\os2\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.pdb

@@ -185,16 +185,16 @@ namespace ParallelComputingSample
                         case 1:
                             {
                                 _competitor.result[_competitor.Index - 1] = 
-                                    _competitor.R[0] & _competitor.R[1] & _competitor.R[2];
+                                    !_competitor.R[0] & _competitor.R[1] & _competitor.R[2];
                                 _txt.Text = 
-                                    "B: F1=" + _competitor.result[_competitor.Index - 1].ToString();
+                                    "B: F1= !R1 & R2 & R3 = " + _competitor.result[_competitor.Index - 1].ToString();
                                 sleep = 400;
                                 break;
                             }
                         case 2:
                             {
                                 _competitor.result[1] = _competitor.R[0] | _competitor.R[1] | _competitor.R[2];
-                                _txt.Text = "C: F2=" + _competitor.result[1].ToString();
+                                _txt.Text = "C: F2= R1 | R2 | R3 = " + _competitor.result[1].ToString();
                                 sleep = 300;
                                 break;
                             }
@@ -203,7 +203,7 @@ namespace ParallelComputingSample
                                 _competitor.result[_competitor.Index - 1] =
                                     _competitor.R[0] | _competitor.R[1] & _competitor.R[2];
                                 _txt.Text =
-                                    "D: F3=" + _competitor.result[_competitor.Index - 1].ToString();
+                                    "D: F3= R1 | R2 & R3 = " + _competitor.result[_competitor.Index - 1].ToString();
                                 sleep = 400;
                                 break;
                             }
@@ -252,8 +252,8 @@ namespace ParallelComputingSample
             {
                 if (_competitor.Speed < _competitor.MaxSpeed)
                 {
-                    _competitor.result[3] = _competitor.R[0] | _competitor.R[1] | _competitor.R[2];
-                    _txt.Text = "E: F3=" + _competitor.result[3].ToString();
+                    _competitor.result[3] = _competitor.result[1];
+                    _txt.Text = "E: F3 = F2 = " + _competitor.result[3].ToString();
 
                 }
 
@@ -322,8 +322,8 @@ namespace ParallelComputingSample
             {
                 if (_competitor.Speed < _competitor.MaxSpeed)
                 {
-                    _competitor.result[4] = _competitor.R[0] | _competitor.R[1] | _competitor.R[2];
-                    _txt.Text = "F: F3=" + _competitor.result[4].ToString();
+                    _competitor.result[4] = _competitor.result[0] & _competitor.result[2] | _competitor.result[3];
+                    _txt.Text = "F: F5= F1 & F3 | F4 = " + _competitor.result[4].ToString();
 
                 }
 
@@ -354,8 +354,8 @@ namespace ParallelComputingSample
             {
                 if (_competitor.Speed < _competitor.MaxSpeed)
                 {
-                    _competitor.result[5] = _competitor.R[0] | _competitor.R[1] | _competitor.R[2];
-                    _txt.Text = "G: F3=" + _competitor.result[5].ToString();
+                    _competitor.result[5] = _competitor.result[0] | _competitor.result[2] | _competitor.result[3];
+                    _txt.Text = "G: F6= F1 | F3 | F4 = " + _competitor.result[5].ToString();
 
                 }
 
@@ -386,8 +386,8 @@ namespace ParallelComputingSample
             {
                 if (_competitor.Speed < _competitor.MaxSpeed)
                 {
-                    _competitor.result[6] = _competitor.R[0] | _competitor.R[1] | _competitor.R[2];
-                    _txt.Text = "H: F3=" + _competitor.result[6].ToString();
+                    _competitor.result[6] = _competitor.result[0] | !_competitor.result[2] & _competitor.result[3];
+                    _txt.Text = "H: F7= F1 | !F3 & F4 = " + _competitor.result[6].ToString();
 
                 }
 
@@ -427,8 +427,8 @@ namespace ParallelComputingSample
             {
                 if (_competitor.Speed < _competitor.MaxSpeed)
                 {
-                    _competitor.result[7] = _competitor.R[0] | _competitor.R[1] | _competitor.R[2];
-                    _txt.Text = "K: F3=" + _competitor.result[7].ToString();
+                    _competitor.result[7] = _competitor.result[6] | _competitor.result[5] | _competitor.result[4];
+                    _txt.Text = "K: F8= F7 | F6 | F5 = " + _competitor.result[7].ToString();
 
                 }
 
