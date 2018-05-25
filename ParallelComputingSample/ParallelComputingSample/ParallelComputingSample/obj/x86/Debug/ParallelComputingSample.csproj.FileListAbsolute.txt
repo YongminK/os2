@@ -1,0 +1,20 @@
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\bin\Debug\ParallelComputingSample.exe
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\bin\Debug\ParallelComputingSample.pdb
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\ResolveAssemblyReference.cache
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\ParallelComputingSample.MainForm.resources
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\ParallelComputingSample.Properties.Resources.resources
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\GenerateResource.read.1.tlog
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\GenerateResource.write.1.tlog
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\ParallelComputingSample.exe
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\ParallelComputingSample.pdb
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\bin\Debug\ParallelComputingSample.exe.config
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\bin\Debug\ParallelComputingSample.exe.config
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\bin\Debug\ParallelComputingSample.exe
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\bin\Debug\ParallelComputingSample.pdb
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\ResolveAssemblyReference.cache
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\ParallelComputingSample.MainForm.resources
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\ParallelComputingSample.Properties.Resources.resources
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\GenerateResource.read.1.tlog
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\GenerateResource.write.1.tlog
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\ParallelComputingSample.exe
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Debug\ParallelComputingSample.pdb

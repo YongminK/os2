@@ -1,0 +1,39 @@
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.exe
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.pdb
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ResolveAssemblyReference.cache
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.MainForm.resources
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.Properties.Resources.resources
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\GenerateResource.read.1.tlog
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\GenerateResource.write.1.tlog
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.exe
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.pdb
+I:\Проекты\SRC\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.exe.config
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.exe.config
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.exe
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.pdb
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.exe
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.pdb
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ResolveAssemblyReference.cache
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.MainForm.resources
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.Properties.Resources.resources
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\GenerateResource.read.1.tlog
+I:\Oleg\jino\codingcraft\C# Часть 6\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\1234\Downloads\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.exe.config
+C:\Users\1234\Downloads\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.exe
+C:\Users\1234\Downloads\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.pdb
+C:\Users\1234\Downloads\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.csprojResolveAssemblyReference.cache
+C:\Users\1234\Downloads\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.MainForm.resources
+C:\Users\1234\Downloads\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.Properties.Resources.resources
+C:\Users\1234\Downloads\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.csproj.GenerateResource.Cache
+C:\Users\1234\Downloads\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.csproj.CoreCompileInputs.cache
+C:\Users\1234\Downloads\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.exe
+C:\Users\1234\Downloads\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.pdb
+C:\Users\Алекс\Desktop\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.exe.config
+C:\Users\Алекс\Desktop\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.exe
+C:\Users\Алекс\Desktop\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\bin\Release\ParallelComputingSample.pdb
+C:\Users\Алекс\Desktop\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.csprojResolveAssemblyReference.cache
+C:\Users\Алекс\Desktop\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.MainForm.resources
+C:\Users\Алекс\Desktop\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.Properties.Resources.resources
+C:\Users\Алекс\Desktop\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.csproj.GenerateResource.Cache
+C:\Users\Алекс\Desktop\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.exe
+C:\Users\Алекс\Desktop\ParallelComputingSample\ParallelComputingSample\ParallelComputingSample\obj\x86\Release\ParallelComputingSample.pdb
